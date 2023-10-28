@@ -1,0 +1,39 @@
+<h1>Dashboard</h1>
+<div class="add-customer-btn">
+<button type="button" class="btn btn-primary" (click)="add()">ADD NEW CUSTOMER</button>
+</div>
+<app-loader *ngIf="showLoader()"></app-loader>
+<div *ngIf="customersData && customersData.length && !loading">
+<div><h3>Existing Customers</h3></div>
+
+<div class="existing-customers-table-container">
+<table class="table" >
+  <thead>
+  <tr>
+    <th *ngFor="let header of customerHeaders">{{ header|uppercase }}</th>
+    <th>Delete</th>
+    <th>Edit</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let customer of customersData">
+    <td *ngFor="let header of customerHeaders">
+     
+      <a *ngIf="header.toLowerCase() === 'email'" href="mailto:{{ customer[header] }}">{{customer[header]}}</a>
+      <span *ngIf="header.toLowerCase() === 'balance'">{{(customer[header]) | currency}}</span>
+      <span *ngIf="header.toLowerCase() != 'balance' && header.toLowerCase() != 'email'">{{customer[header]}}</span>
+    </td>
+    <td>
+      <button class="btn btn-danger" (click)="delete($event,customer)">Delete</button>
+    </td>
+    <td>
+      <button class="btn btn-secondary" (click)="edit($event,customer)">Edit</button>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
+
+</div>

@@ -1,0 +1,28 @@
+.text-danger{
+    color: brown;
+}
+.edit-form-container{
+    padding: 10px;
+}
+.edit-form-submit-btn{
+    padding-top: 10px;
+}
+.border-black{
+    border: 1px solid black;
+}
+.wd-25-pct{
+    width: 25%;
+}
+
+.error-container{
+    background-color: #dc3545;
+    color: whitesmoke;
+    border-color: #dc0033;
+    padding: 10px;
+}
+.success-container{
+    background-color: #28a745;
+    border-color: #58a045;
+    color: whitesmoke;
+    padding: 10px;
+}

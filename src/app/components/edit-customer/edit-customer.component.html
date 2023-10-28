@@ -1,0 +1,112 @@
+<h1>Edit Customer</h1>
+<div><button class="btn primary border-black" (click)="backtoHome()">Back to Home</button></div>
+<div>
+    <ng-container #statusView></ng-container>
+    <ng-template #error>
+        <div class="error-container">
+            <span>{{errorMessage}}</span>
+        </div>
+    </ng-template>
+    <ng-template #success>
+        <div class="success-container">
+            <span>{{successMessage}}</span>
+        </div>
+    </ng-template>
+</div>
+<div class="edit-form-container">
+
+    <form [formGroup]="editCustomerForm" (ngSubmit)="onSubmit()">
+        <div class="form-control-container">
+        <div><label for="first-name">*First Name:</label></div>
+        <div><input class="wd-25-pct" id="first-name" type="text" formControlName="firstName"/></div>
+        <div><span class="text-danger" *ngIf="editCustomerForm.get('firstName')?.errors 
+                                        && editCustomerForm.get('firstName')?.hasError('required')
+                                        && editCustomerForm.get('firstName')?.touched">First Name is required</span>
+        </div>
+        </div>
+        <div class="form-control-container">
+            <div><label for="last-name">*Last Name:</label></div>
+            <div><input class="wd-25-pct" id="last-name" type="text" formControlName="lastName"/></div>
+            <div><span class="text-danger" *ngIf="editCustomerForm.get('lastName')?.errors 
+                                            && editCustomerForm.get('lastName')?.hasError('required')
+                                            && editCustomerForm.get('lastName')?.touched">Last Name is required</span>
+            </div>
+            </div>
+            <div class="form-control-container">
+                <div><label for="email">*Email:</label></div>
+                <div><input class="wd-25-pct" id="email" type="email" formControlName="email"/></div>
+                <div><span class="text-danger" *ngIf="editCustomerForm.get('email')?.errors 
+                                                && editCustomerForm.get('email')?.hasError('required')
+                                                && editCustomerForm.get('email')?.touched">Email is required</span>
+                </div>
+                <div><span class="text-danger" *ngIf="editCustomerForm.get('email')?.errors 
+                    && editCustomerForm.get('email')?.hasError('email')
+                    && editCustomerForm.get('email')?.touched">Email is not valid</span>
+                </div>
+                </div>
+                <div class="form-control-container">
+                    <div><label for="country-tele-code">*Country Tele Code</label></div>
+                    <div><select class="wd-25-pct" id="country-tele-code" formControlName="teleCodeOfPhoneNumber">
+                        <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.teleCode">{{op.teleCode}}</option>
+                    </select>
+                    </div>
+                   
+                </div>
+                <div class="form-control-container">
+                    <div><label for="phone-number">*Phone Number:</label></div>
+                    <div><input class="wd-25-pct" id="phone-number" type="text" formControlName="phoneNumber"/></div>
+                    <div><span class="text-danger" *ngIf="editCustomerForm.get('phoneNumber')?.errors 
+                                                    && editCustomerForm.get('phoneNumber')?.hasError('required')
+                                                    && editCustomerForm.get('phoneNumber')?.touched">phone number is required</span>
+                    </div>
+                    
+                </div>
+    
+                <div class="form-control-container">
+                    <div><label for="gender">Gender</label></div>
+                    <div><select class="wd-25-pct" id="gender" formControlName="gender">
+                        <option *ngFor="let op of getGenderList()" [ngValue]="op.value">{{op.key}}</option>
+                    </select>
+                    </div>
+                    <div>
+                        <span class="text-danger" *ngIf="editCustomerForm.get('gender')?.errors 
+                                                    && editCustomerForm.get('gender')?.hasError('required')
+                                                    && editCustomerForm.get('gender')?.touched">*Gender is required</span>
+                    
+                    </div>
+                </div>
+                <div class="form-control-container">
+                    <div><label for="country-code">Country</label></div>
+                    <div><select class="wd-25-pct" id="country-code" formControlName="countryCode">
+                        <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.code">{{op.name}}</option>
+                    </select>
+                    </div>
+                   
+                </div>
+    
+                <div class="form-control-container">
+                    <div><label for="balance">*Balance:</label></div>
+                    <div><input class="wd-25-pct" id="balance" type="text" formControlName="balance"/></div>
+                    </div>
+    
+                <div class="form-control-container">
+                    <div>
+                        <div><label for="password">*Password:</label></div>
+                    <div><input class="wd-25-pct" id="password" type="password" formControlName="password"/></div>
+                    <div>
+                        <span class="text-danger" *ngIf="editCustomerForm.get('password')?.errors 
+                                                    && editCustomerForm.get('password')?.hasError('required')
+                                                    && editCustomerForm.get('password')?.touched">*Password is required</span>
+                    
+                    </div>
+                    </div>
+                </div>
+    
+                <div>
+                    <span *ngIf="editCustomerForm.touched && !editCustomerForm.valid">The form is invalid, fill correctly.</span>
+                </div>
+                <div class="edit-form-submit-btn">
+                <button class="btn btn-secondary wd-25-pct" type="submit">Submit</button>
+            </div>
+    </form>
+</div>

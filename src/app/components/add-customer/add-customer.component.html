@@ -1,0 +1,121 @@
+<h1>Add Customer</h1>
+<div class="back-home-btn-container"><button class="btn primary border-black " (click)="backtoHome()">Back to Home</button></div>
+<div>
+    <ng-container #statusView></ng-container>
+    <ng-template #error>
+        <div class="error-container">
+            <span>{{errorMessage}}</span>
+        </div>
+    </ng-template>
+    <ng-template #success>
+        <div class="success-container">
+            <span>{{successMessage}}</span>
+        </div>
+    </ng-template>
+</div>
+<div class="add-form-container">
+<form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
+    <div class="form-control-container">
+    <div><label for="first-name">*First Name:</label></div>
+    <div><input class="wd-25-pct" id="first-name" type="text" formControlName="firstName"/></div>
+    <div><span class="text-danger" *ngIf="addCustomerForm.get('firstName')?.errors 
+                                    && addCustomerForm.get('firstName')?.hasError('required')
+                                    && addCustomerForm.get('firstName')?.touched">First Name is required</span>
+    </div>
+    </div>
+    <div class="form-control-container">
+        <div><label for="last-name">*Last Name:</label></div>
+        <div><input class="wd-25-pct" id="last-name" type="text" formControlName="lastName"/></div>
+        <div><span class="text-danger" *ngIf="addCustomerForm.get('lastName')?.errors 
+                                        && addCustomerForm.get('lastName')?.hasError('required')
+                                        && addCustomerForm.get('lastName')?.touched">Last Name is required</span>
+        </div>
+        </div>
+        <div class="form-control-container">
+            <div><label for="email">*Email:</label></div>
+            <div><input class="wd-25-pct" id="email" type="email" formControlName="email"/></div>
+            <div><span class="text-danger" *ngIf="addCustomerForm.get('email')?.errors 
+                                            && addCustomerForm.get('email')?.hasError('required')
+                                            && addCustomerForm.get('email')?.touched">Email is required</span>
+            </div>
+            <div><span class="text-danger" *ngIf="addCustomerForm.get('email')?.errors 
+                && addCustomerForm.get('email')?.hasError('email')
+                && addCustomerForm.get('email')?.touched">Email is not valid</span>
+            </div>
+            </div>
+
+            <div class="form-control-container">
+                <div><label for="country-tele-code">*Country Tele Code</label></div>
+                <div><select class="wd-25-pct" id="country-tele-code" formControlName="teleCodeOfPhoneNumber">
+                    <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.teleCode">{{op.teleCode}}</option>
+                </select>
+                </div>
+               
+            </div>
+
+            <div class="form-control-container">
+                <div><label for="phone-number">*Phone Number:(should be in 123-456-7890 format)</label></div>
+                <div><input class="wd-25-pct" id="phone-number" type="tel" formControlName="phoneNumber"/></div>
+                <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
+                                                && addCustomerForm.get('phoneNumber')?.hasError('required')
+                                                && addCustomerForm.get('phoneNumber')?.touched">phone number is required</span>
+                </div>
+                <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
+                    && addCustomerForm.get('phoneNumber')?.hasError('minlength')
+                    && addCustomerForm.get('phoneNumber')?.touched">phone number does not meet min length of 12</span>
+                </div>
+                <div><span class="text-danger" *ngIf="addCustomerForm.get('phoneNumber')?.errors 
+                    && addCustomerForm.get('phoneNumber')?.hasError('pattern')
+                    && addCustomerForm.get('phoneNumber')?.touched">phone number is invalid</span>
+                </div>
+            </div>
+
+            <div class="form-control-container">
+                <div><label for="gender">Gender</label></div>
+                <div><select class="wd-25-pct" id="gender" formControlName="gender">
+                    <option *ngFor="let op of getGenderList()" [ngValue]="op.value">{{op.key}}</option>
+                </select>
+                </div>
+                <div>
+                    <span class="text-danger" *ngIf="addCustomerForm.get('gender')?.errors 
+                                                && addCustomerForm.get('gender')?.hasError('required')
+                                                && addCustomerForm.get('gender')?.touched">*Gender is required</span>
+                
+                </div>
+            </div>
+            <div class="form-control-container">
+                <div><label for="country-code">Country</label></div>
+                <div><select class="wd-25-pct" id="country-code" formControlName="countryCode">
+                    <option *ngFor="let op of getCountriesInfo()" [ngValue]="op.code">{{op.name}}</option>
+                </select>
+                </div>
+               
+            </div>
+
+            
+            <div class="form-control-container">
+                <div><label for="balance">*Balance:</label></div>
+                <div><input class="wd-25-pct" id="balance" type="text" formControlName="balance"/></div>
+                </div>
+
+            <div class="form-control-container">
+                <div>
+                    <div><label for="password">*Password:</label></div>
+                <div><input class="wd-25-pct" id="password" type="password" formControlName="password"/></div>
+                <div>
+                    <span class="text-danger" *ngIf="addCustomerForm.get('password')?.errors 
+                                                && addCustomerForm.get('password')?.hasError('required')
+                                                && addCustomerForm.get('password')?.touched">*Password is required</span>
+                
+                </div>
+                </div>
+            </div>
+
+            <div>
+                <span *ngIf="addCustomerForm.touched && !addCustomerForm.valid">The form is invalid, fill correctly.</span>
+            </div>
+            <div class="add-form-submit-btn">
+            <button class="btn btn-secondary wd-25-pct" type="submit">Submit</button>
+        </div>
+</form>
+</div>
